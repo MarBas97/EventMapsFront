@@ -1,0 +1,34 @@
+ mat-card {
+    width: 650px;
+    height: 400px;
+    padding-top: 10vh;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;  
+    background-color: white;
+    transition: none !important;
+    box-shadow: none !important;
+} 
+
+mat-card-title {
+    color: black;
+}
+
+.main-div{
+    display: flex;
+    padding: 0px 10px 0px 10px
+}
+
+/*
+
+mat-card-header {
+    display: inline;
+}
+
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+} */ 
