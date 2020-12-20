@@ -21,8 +21,8 @@
             <mat-form-field style=" width: 100%">
                 <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password" name="confirmPassword">
             </mat-form-field>
-            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-               <div *ngIf="f.confirmPassword.errors.invalidPasswords" style="color: red;">Passwords must be equal</div>
+            <div *ngIf="submitted && v.errors" class="invalid-feedback">
+               <div *ngIf="submitted" style="color: red;">Passwords must be equal</div>
             </div>
           </form>
        </mat-card-content>
