@@ -1,5 +1,4 @@
-<div style="height: 600px;"
-     leaflet 
-     [leafletOptions]="options"
-     [leafletLayersControl]="layersControl">
-</div>
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+     <app-header></app-header>
+     <router-outlet></router-outlet>
+ </div>

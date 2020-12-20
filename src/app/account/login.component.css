@@ -1,0 +1,48 @@
+ mat-card {
+    width: 650px;
+    height: 400px;
+    padding-top: 7vh;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;  
+    background-color: white;
+    transition: none !important;
+    box-shadow: none !important;
+} 
+
+mat-card-title {
+    color: black;
+}
+
+input {
+    color: black;
+}
+
+.main-div{
+    display: flex;
+    padding: 0px 10px 0px 10px
+}
+
+.login-sub-footer {
+    margin-top: 80%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    height: 40px!important;
+    justify-content: space-between!important;
+    display: flex;
+    align-items: center;
+}
+
+.no-account-text {
+    font-size: 13px!important;
+    white-space: pre-line;
+    color: black;
+}
+
+.sign-up-text {
+    font-size: 15px!important;
+    white-space: nowrap;
+    color: #7b1fa2
+}
