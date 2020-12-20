@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    registerView(){
+        this.router.navigate(['account/register']);
+    }
 
     login() {
         this.submitted = true;

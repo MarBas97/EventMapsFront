@@ -1,59 +1,56 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { Router  } from '@angular/router';
+import {  AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AccountService, AlertService } from '@app/services';
+import { AccountService } from '@app/services';
+import { CdkVirtualForOf } from '@angular/cdk/scrolling';
 
-@Component({ templateUrl: 'register.component.html' })
+@Component({ templateUrl: 'register.component.html',  styleUrls: ['./login.component.css'] })
 export class RegisterComponent implements OnInit {
+    username: string;
+    password: string;
+    confirmPassword: string;
     form: FormGroup;
-    loading = false;
     submitted = false;
 
     constructor(
         private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
         private router: Router,
-        private accountService: AccountService,
-        private alertService: AlertService
     ) { }
 
-    ngOnInit() {
-        this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
-        });
-    }
-
-    // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
+    get v() { console.log(this.form);return this.form.controls; }
 
-    onSubmit() {
-        this.submitted = true;
-
-        // reset alerts on submit
-        this.alertService.clear();
-
-        // stop here if form is invalid
-        if (this.form.invalid) {
-            return;
-        }
-
-        this.loading = true;
-        this.accountService.register(this.form.value)
-            .pipe(first())
-            .subscribe({
-                next: () => {
-                    this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-                    this.router.navigate(['../login'], { relativeTo: this.route });
-                },
-                error: error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                }
-            });
+    ngOnInit(): void {
+        this.form = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        }, {validators: this.passwordsEqual});
     }
+
+    passwordsEqual (c: AbstractControl) {
+        //safety check
+        // carry out the actual date checks here for is-endDate-after-startDate
+        // if valid, return null,
+        // if invalid, return an error object (any arbitrary name), like, return { invalidEndDate: true }
+        // make sure it always returns a 'null' for valid or non-relevant cases, and a 'non-null' object for when an error should be raised on the formGroup
+        if(!c) {return null}
+        if(!c.value) {return null}
+        if(c.value.confirmPassword !== c.value.password) {
+            c.value.confirmPassword.errors = {invalidPasswords: true}
+            return null
+        } else {
+            return null
+        }
+       }
+
+    register() {
+        this.submitted = true;
+    }
+
+    loginView() {
+        this.router.navigate(['account/login']);
+    }
+    
 }
