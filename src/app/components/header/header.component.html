@@ -9,11 +9,11 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click) = "mapView()">
         <mat-icon>map</mat-icon>
         <span>Mapa</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click) = "myPointersView()">
         <mat-icon>list_alt</mat-icon>
         <span>Moje znaczniki</span>
       </button>
