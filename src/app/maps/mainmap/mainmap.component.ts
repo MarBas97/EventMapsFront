@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { circle, latLng, polygon, tileLayer } from 'leaflet';
+import { tileLayer } from 'leaflet';
 
 @Component({
   selector: 'app-mainmap',
@@ -10,14 +10,6 @@ import { circle, latLng, polygon, tileLayer } from 'leaflet';
 export class MainmapComponent implements OnInit {
 
 
-  options = {
-    layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-    ],
-    zoom: 17,
-    center: latLng(50.288599, 18.677326)
-  };
-
   constructor() { }
 
   ngOnInit(): void {
@@ -25,5 +17,4 @@ export class MainmapComponent implements OnInit {
     mymap.addLayer(tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }))
     mymap.locate({setView: true, maxZoom: 16});
   }
-
 }
