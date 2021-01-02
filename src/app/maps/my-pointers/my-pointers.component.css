@@ -1,0 +1,137 @@
+.my-pointers-view-content {
+    height: 100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-section {
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+    background: #f0f0f2;
+    border-radius: 5px;
+}
+
+.pointers-table-header {
+    display: flex;
+    width: 100%;
+    height: 36px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    background-color: #a5b3b7;
+    border-radius: 5px;
+}
+.pointers-table-header div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    justify-content: start;
+    text-align: center;
+    padding-left: 12px;
+}
+.pointers-table-header div.wide {
+    width: calc(6 / 16 * 100%);
+}
+.pointers-table-header div.medium {
+    width: calc(5 / 16 * 100%);
+}
+.pointers-table-header div:not(:last-child) {
+    border-right: 5px solid #c8d0d6;
+}
+
+.search-table-header {
+    display: flex;
+    flex-direction: row;
+    flex: 100%;
+    width: 100%;
+    height: 36px;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+.search-table-header div {
+    text-align: start;
+    justify-content: start;
+    display: flex;
+}
+.search-table-header div.wide {
+    width: calc(6 / 16 * 100%);
+}
+.search-table-header div.medium {
+    width: calc(5 / 16 * 100%);
+}
+.search-table-header div:not(:last-child) {
+    padding-right: 5px;
+}
+.search-table-header .searchable {
+    border: none;
+    color: white;
+    height: 32px;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid #8091a2;
+    color: #8091a2;
+    border-radius: 5px;
+    font-size: 13px;
+    padding-right: 16px;
+    text-align: start;
+    justify-content: start;
+}
+
+.pointers-content {
+    overflow-y: auto;
+    width: 100%;
+    background: #f0f0f2;
+    height: 100%;
+}
+.pointers-content .pointers-table-row {
+    width: 100%;
+    background: #ebeff0;
+    height: 56px;
+    display: flex;
+    border-radius: 5px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.247);
+    margin-bottom: 5px;
+}
+.pointers-content .pointers-table-row div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    color: black;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    line-height: 50px;
+}
+.pointers-content .pointers-table-row div.wide {
+    width: calc(6 / 16 * 100%);
+    text-align: start;
+    justify-content: start;
+}
+.pointers-content .pointers-table-row div.medium {
+    width: calc(5 / 16 * 100%);
+    text-align: start;
+    justify-content: start;
+}
+.pointers-content .pointers-table-row div.small {
+    width: calc(1 / 16 * 100%);
+}
+.pointers-content .pointers-table-row div.left-position {
+    text-align: left;
+}
+.pointers-content .pointers-table-row div.right-position {
+    text-align: center;
+    justify-content: center;
+}
+.pointers-content .pointers-table-row div.left {
+    text-align: start;
+    justify-content: start;
+}
+.pointers-content .pointers-table-row div:not(:last-child) {
+    margin-right: 5px;
+}

@@ -6,7 +6,6 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './components';
-import { HomeComponent } from './home';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor, fakeBackendProvider, JwtInterceptor } from './helpers';
@@ -29,13 +28,11 @@ import { HeaderComponent } from './components/header/header.component';
   declarations: [
     AppComponent,
     AlertComponent,
-    HomeComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LeafletModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

@@ -2,7 +2,6 @@
 import { Router  } from '@angular/router';
 import {  AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AccountService } from '@app/services';
 @Component({ templateUrl: 'register.component.html',  styleUrls: ['./login.component.css'] })
 export class RegisterComponent implements OnInit {
     form: FormGroup;
@@ -45,6 +44,5 @@ export class RegisterComponent implements OnInit {
 
     loginView() {
         this.router.navigate(['account/login']);
-    }
-    
+    } 
 }
