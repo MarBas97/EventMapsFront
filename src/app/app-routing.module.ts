@@ -7,7 +7,7 @@ const accountModule = () => import('./account/account.module').then(x => x.Accou
 const mapModule = () => import('./maps/maps.module').then(x => x.MapsModule);
 
 const routes: Routes = [
-    { path: 'maps', loadChildren: mapModule , canActivate: [AuthGuard] },
+    { path: 'maps', loadChildren: mapModule},
     { path: 'account', loadChildren: accountModule },
 
     // otherwise redirect to home

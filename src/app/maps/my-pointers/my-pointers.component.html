@@ -1,3 +1,38 @@
-<div *ngFor="let pointer of pointers" (click)="showOnMap(pointer)">
-    {{pointer.createdOn}} {{pointer.description}} {{pointer.likes}}
+<div class="my-pointers-view-content">
+    <div class=list-section>
+        <div class="pointers-table-header">
+            <div class="wide">
+                Data
+            </div>
+            <div class="medium">
+                Opis
+            </div>
+            <div class="medium">
+                Polubienia
+            </div>
+        </div>
+        <div class="search-table-header">
+
+            <div class="wide"> <input [formControl]="dateSearchControl" id="dateSearchControl" class="searchable"
+                    [placeholder]="'Szukaj'" />
+            </div>
+
+            <div class="medium"> <input [formControl]="nameSearchControl" id="nameSearchControl" class="searchable"
+                    [placeholder]="'Szukaj'" />
+            </div>
+
+            <div class="medium"> <input [formControl]="dateSearchControl" id="dateSearchControl" class="searchable"
+                    [placeholder]="'Szukaj'" />
+            </div>
+
+        </div>
+
+        <div class="pointers-content">
+            <div class="pointers-table-row" *ngFor="let pointer of visiblePointers" (click)="showOnMap(pointer)">
+                <div class="wide"><span>{{pointer.createdOn | date: "HH:mm dd-MM-yyyy"}}</span></div>
+                <div class="medium"><span>{{pointer.description}}</span></div>
+                <div class="medium right-position"><span>{{pointer.likes}}</span></div>
+            </div>
+        </div>
+    </div>
 </div>
