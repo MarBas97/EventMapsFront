@@ -1,7 +1,9 @@
 export interface MyPointer{
-    createdOn: Date
-    long: number
-    lat: number
-    description: string
-    likes: number
+    id: number;
+    longitude: number;
+    latitude: number;
+    description: string;
+    likes: number;
+    created_on: Date;
+    created_by: number;
 }

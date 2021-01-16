@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MyPointer, Pointer } from '@app/models';
-import { Pointers } from '../mockPointers';
 
 @Component({
   selector: 'app-my-pointers',
@@ -23,18 +22,17 @@ export class MyPointersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.pointers = Pointers;
     this.visiblePointers = this.pointers;
 
     this.dateSearchControl.valueChanges.subscribe((x) => {
       this.filterSearchValues();
-    })
+    });
     this.nameSearchControl.valueChanges.subscribe((x) => {
       this.filterSearchValues();
-    })
+    });
     this.likesSearchControl.valueChanges.subscribe((x) => {
       this.filterSearchValues();
-    })
+    });
   }
 
   showOnMap(pointer: Pointer) {
@@ -45,7 +43,7 @@ export class MyPointersComponent implements OnInit {
     this.visiblePointers = this.pointers.filter((x) => {
       let canBeVisible = true;
       if (this.dateSearchControl.value !== '') {
-        if (!x.createdOn.toLocaleDateString().startsWith(this.dateSearchControl.value)) {
+        if (!x.created_on.toLocaleDateString().startsWith(this.dateSearchControl.value)) {
           canBeVisible = canBeVisible && false;
         }
       }

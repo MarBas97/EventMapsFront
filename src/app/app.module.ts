@@ -6,7 +6,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './components';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor, fakeBackendProvider, JwtInterceptor } from './helpers';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,14 +38,15 @@ import { HeaderComponent } from './components/header/header.component';
     BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatDialogModule,
     MatTableModule,
     MatMenuModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
