@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MyPointer, Pointer } from '@app/models';
+import {MapPointersService} from '@app/services/map-pointers.service';
 
 @Component({
   selector: 'app-my-pointers',
@@ -19,7 +20,10 @@ export class MyPointersComponent implements OnInit {
   public pointers: MyPointer[] = [];
   public visiblePointers: MyPointer[] = [];
 
-  constructor() { }
+  public userPointers: MyPointer[];
+
+
+  constructor(private mapPointerService: MapPointersService) { }
 
   ngOnInit(): void {
     this.visiblePointers = this.pointers;
@@ -33,6 +37,8 @@ export class MyPointersComponent implements OnInit {
     this.likesSearchControl.valueChanges.subscribe((x) => {
       this.filterSearchValues();
     });
+
+    this.mapPointerService.getUserPointers().subscribe(value => {this.userPointers = value; });
   }
 
   showOnMap(pointer: Pointer) {

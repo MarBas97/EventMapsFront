@@ -28,7 +28,7 @@
         </div>
 
         <div class="pointers-content">
-            <div class="pointers-table-row" *ngFor="let pointer of visiblePointers" (click)="showOnMap(pointer)">
+            <div class="pointers-table-row" *ngFor="let pointer of userPointers" (click)="showOnMap(pointer)">
                 <div class="wide"><span>{{pointer.created_on | date: "HH:mm dd-MM-yyyy"}}</span></div>
                 <div class="medium"><span>{{pointer.description}}</span></div>
                 <div class="medium right-position"><span>{{pointer.likes}}</span></div>

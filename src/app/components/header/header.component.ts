@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AccountService} from '@app/services';
 
 @Component({
   selector: 'app-header',
@@ -8,17 +9,20 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
   mapView() {
-    this.router.navigate(['maps/main'])
+    this.router.navigate(['maps/main']);
   }
 
   myPointersView() {
-    this.router.navigate(['maps/mypointers'])
+    this.router.navigate(['maps/mypointers']);
   }
 
+  logout(): void {
+    this.accountService.logout().subscribe(value => {console.log(value); });
+  }
 }

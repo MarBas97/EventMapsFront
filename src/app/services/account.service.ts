@@ -2,10 +2,11 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {map, share} from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { User } from '../models';
+
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -24,25 +25,30 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(username, password) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
-            }));
+    login(email: string, password: string): Observable<any> {
+        const request = this.http.post<TestUser>(`${environment.apiUrl}/api/login`, { email, password })
+          .pipe(share());
+        request.subscribe(res => {
+          localStorage.setItem('user', JSON.stringify(res.user_id));
+        }, error => {console.log('error login');
+        });
+        return request;
     }
 
-    logout() {
+
+    logout(): Observable<any> {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/account/login']);
+        return this.http.get<any>(`${environment.apiUrl}/api/logout`);
     }
 
-    register(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+    //register(user: User) {
+    //    return this.http.post(`${environment.apiUrl}/api/register`, user);
+    //}
+    register(email: string, password: string): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/api/register`, { email, password });
     }
 
     getAll() {
@@ -79,4 +85,9 @@ export class AccountService {
                 return x;
             }));
     }
+}
+
+export interface TestUser {
+  result: boolean;
+  user_id: number;
 }
