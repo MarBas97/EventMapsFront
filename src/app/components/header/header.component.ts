@@ -9,9 +9,18 @@ import {AccountService} from '@app/services';
 })
 export class HeaderComponent implements OnInit {
 
+  logButton = 'Zaloguj';
+
   constructor(private router: Router, private accountService: AccountService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      if (localStorage.getItem('user') === null){
+        this.logButton = 'Zaloguj';
+      }else {
+        this.logButton = 'Wyloguj';
+      }
+    }, 100);
   }
 
   mapView() {
@@ -23,6 +32,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
+    this.logButton = 'Zaloguj';
     this.accountService.logout().subscribe(value => {console.log(value); });
   }
+
 }
