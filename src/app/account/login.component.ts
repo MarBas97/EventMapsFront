@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/services';
+import {HeaderComponent} from "@app/components/header/header.component";
 
 @Component({ templateUrl: 'login.component.html' , styleUrls: ['./login.component.css']})
 export class LoginComponent implements OnInit {
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
-        private alertService: AlertService
+        private alertService: AlertService,
     ) { }
 
     username: string;
@@ -39,12 +40,16 @@ export class LoginComponent implements OnInit {
                 next: () => {
                     // get return url from query parameters or default to home page
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                    this.router.navigateByUrl(returnUrl);
+                    this.router.navigateByUrl(returnUrl).then(() => {window.location.reload(); });
                 },
                 error: error => {
                     this.alertService.error(error);
                     this.loading = false;
                 }
             });
+    }
+    navigateToMap(): void{
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      this.router.navigateByUrl(returnUrl).then(() => {window.location.reload(); });
     }
 }

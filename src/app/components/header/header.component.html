@@ -17,9 +17,9 @@
         <mat-icon>list_alt</mat-icon>
         <span>Moje znaczniki</span>
       </button>
-      <button mat-menu-item>
+      <button (click)="logout()" mat-menu-item>
         <mat-icon>power_settings_new</mat-icon>
-        <span>Wyloguj</span>
+        <span>{{logButton}}</span>
       </button>
     </mat-menu>
 </mat-toolbar-row>
