@@ -32,7 +32,7 @@ export class MapPointersService {
 
     public addPointer(longitude: number, latitude: number, description: string): Observable<any> {
 
-        if(localStorage.getItem('user') === null) {
+        if (localStorage.getItem('user') === null) {
           return null;
         }
         else {
@@ -42,4 +42,19 @@ export class MapPointersService {
             {longitude, latitude, description, created_by: localStorage.getItem('user')}, {headers});
         }
     }
+  public addLike(id: number): Observable<any> {
+
+      if (localStorage.getItem('user') === null) {
+      console.log('niezalogowany');
+      return null;
+    }
+    else {
+        console.log('zalogowany');
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        const params = new HttpParams().set('user_id', localStorage.getItem('user')).set('id', String(id));
+        return this.http.put(`${environment.apiUrl}/api/addLike`, {},
+        {headers, params});
+    }
+  }
 }
