@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogData, PointerCreatorDialog } from '@app/dialogs/add-pointer-dialog.component';
@@ -6,6 +5,7 @@ import { MyPointer } from '@app/models';
 import { MapPointersService } from '@app/services/map-pointers.service';
 import * as L from 'leaflet';
 import { tileLayer, icon, Marker } from 'leaflet';
+import {stringify} from "querystring";
 
 @Component({
   selector: 'app-mainmap',
@@ -48,8 +48,24 @@ export class MainmapComponent implements OnInit {
         (pointers) => {
           for (const pointer of pointers) {
             if (that.pointers.findIndex(p => p.id === pointer.id) === -1) {
-              L.marker([pointer.latitude, pointer.longitude]).addTo(that.map)
-                .bindPopup(pointer.description + '\n' + 'Likes: ' + pointer.likes);
+              const marker: any = L.marker([pointer.latitude, pointer.longitude]);
+              marker.id = pointer.id;
+              marker.addTo(that.map)
+                .bindPopup(pointer.description + '\n' + 'Likes: ' + pointer.likes)
+              .addEventListener('dblclick', () => that.pointerService.addLike(pointer.id)
+                .subscribe(value => { if ((value as any).result === 'success'){
+                  console.log('git');
+                  pointer.likes = pointer.likes + 1;
+                  that.map.eachLayer((layer: any) => {
+                    if (layer.id && layer.id ===  pointer.id) {
+                      layer._popup._content = pointer.description + '\n' + 'Likes: ' + pointer.likes;
+                    }
+                  });
+                }
+                else {
+                  console.log('nie git');
+                }
+              }));
               that.pointers.push(pointer);
             }
           }
@@ -69,7 +85,7 @@ export class MainmapComponent implements OnInit {
             (response) => {
               if (response.id > -1) {
                 L.marker([event.latlng.lat, event.latlng.lng]).addTo(that.map)
-                .bindPopup(result.description + '\n' + 'Likes: ' + 0);
+                  .bindPopup(result.description + '\n' + 'Likes: ' + 0);
                 that.pointers.push(
                   {
                     id: 0,

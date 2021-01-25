@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {map, share} from 'rxjs/operators';
 
@@ -26,10 +26,15 @@ export class AccountService {
     }
 
     login(email: string, password: string): Observable<any> {
-        const request = this.http.post<TestUser>(`${environment.apiUrl}/api/login`, { email, password })
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        const request = this.http.post<TestUser>(`${environment.apiUrl}/api/login`, { email, password }, {headers})
           .pipe(share());
         request.subscribe(res => {
           localStorage.setItem('user', JSON.stringify(res.user_id));
+          const user = new User();
+          user.id = res.user_id;
+          this.userSubject.next(user);
         }, error => {console.log('error login');
         });
         return request;
@@ -44,46 +49,10 @@ export class AccountService {
         return this.http.get<any>(`${environment.apiUrl}/api/logout`);
     }
 
-    //register(user: User) {
-    //    return this.http.post(`${environment.apiUrl}/api/register`, user);
-    //}
     register(email: string, password: string): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/api/register`, { email, password });
-    }
-
-    getAll() {
-        return this.http.get<User[]>(`${environment.apiUrl}/users`);
-    }
-
-    getById(id: string) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
-    }
-
-    update(id, params) {
-        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
-            .pipe(map(x => {
-                // update stored user if the logged in user updated their own record
-                if (id == this.userValue.id) {
-                    // update local storage
-                    const user = { ...this.userValue, ...params };
-                    localStorage.setItem('user', JSON.stringify(user));
-
-                    // publish updated user to subscribers
-                    this.userSubject.next(user);
-                }
-                return x;
-            }));
-    }
-
-    delete(id: string) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`)
-            .pipe(map(x => {
-                // auto logout if the logged in user deleted their own record
-                if (id == this.userValue.id) {
-                    this.logout();
-                }
-                return x;
-            }));
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(`${environment.apiUrl}/api/register`, { email, password }, {headers});
     }
 }
 
