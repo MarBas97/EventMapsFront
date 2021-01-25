@@ -48,13 +48,19 @@ export class MainmapComponent implements OnInit {
         (pointers) => {
           for (const pointer of pointers) {
             if (that.pointers.findIndex(p => p.id === pointer.id) === -1) {
-              L.marker([pointer.latitude, pointer.longitude]).addTo(that.map)
+              const marker: any = L.marker([pointer.latitude, pointer.longitude]);
+              marker.id = pointer.id;
+              marker.addTo(that.map)
                 .bindPopup(pointer.description + '\n' + 'Likes: ' + pointer.likes)
-              .addEventListener('dblclick', () => this.pointerService.addLike(pointer.id)
+              .addEventListener('dblclick', () => that.pointerService.addLike(pointer.id)
                 .subscribe(value => { if ((value as any).result === 'success'){
                   console.log('git');
                   pointer.likes = pointer.likes + 1;
-                  window.location.reload();
+                  that.map.eachLayer((layer: any) => {
+                    if (layer.id && layer.id ===  pointer.id) {
+                      layer._popup._content = pointer.description + '\n' + 'Likes: ' + pointer.likes;
+                    }
+                  });
                 }
                 else {
                   console.log('nie git');

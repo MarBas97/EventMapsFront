@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: () => {
                     // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/main';
                     this.router.navigateByUrl(returnUrl).then(() => {window.location.reload(); });
                 },
                 error: error => {
@@ -48,8 +48,9 @@ export class LoginComponent implements OnInit {
                 }
             });
     }
+
     navigateToMap(): void{
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-      this.router.navigateByUrl(returnUrl).then(() => {window.location.reload(); });
+      this.router.navigateByUrl(returnUrl).then(() => { });
     }
 }
