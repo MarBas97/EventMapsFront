@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MyPointer, Pointer } from '@app/models';
 import {MapPointersService} from '@app/services/map-pointers.service';
 
@@ -18,16 +19,16 @@ export class MyPointersComponent implements OnInit {
   public searchControl: FormControl = new FormControl('');
 
   public pointers: MyPointer[] = [];
-  public visiblePointers: MyPointer[] = [];
 
   public userPointers: MyPointer[];
 
 
-  constructor(private mapPointerService: MapPointersService) { }
+  constructor(private mapPointerService: MapPointersService, private router: Router) { }
 
   ngOnInit(): void {
-    this.visiblePointers = this.pointers;
+    this.userPointers = this.pointers;
 
+    this.dateSearchControl.disable();
     this.dateSearchControl.valueChanges.subscribe((x) => {
       this.filterSearchValues();
     });
@@ -38,15 +39,17 @@ export class MyPointersComponent implements OnInit {
       this.filterSearchValues();
     });
 
-    this.mapPointerService.getUserPointers().subscribe(value => {this.userPointers = value; });
+    this.mapPointerService.getUserPointers().subscribe(value => {this.userPointers = value; this.pointers = this.userPointers;});
   }
 
-  showOnMap(pointer: Pointer) {
+  public showOnMap(pointer: Pointer): void {
+    console.log(pointer);
 
+    this.router.navigate(['map/main'], {queryParams: {lat: pointer.latitude,  lng: pointer.longitude, id: pointer.id} });
   }
 
   public filterSearchValues(): void {
-    this.visiblePointers = this.pointers.filter((x) => {
+    this.userPointers = this.pointers.filter((x) => {
       let canBeVisible = true;
       if (this.dateSearchControl.value !== '') {
         if (!x.created_on.toLocaleDateString().startsWith(this.dateSearchControl.value)) {

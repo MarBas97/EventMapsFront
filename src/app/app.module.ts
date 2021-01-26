@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './components';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorInterceptor, fakeBackendProvider, JwtInterceptor } from './helpers';
+import { ErrorInterceptor, fakeBackendProvider } from './helpers';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
@@ -49,7 +49,6 @@ import { HeaderComponent } from './components/header/header.component';
     FormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend

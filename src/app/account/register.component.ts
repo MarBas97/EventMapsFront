@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from "@app/services";
 
@@ -11,6 +11,7 @@ export class RegisterComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
+        private route: ActivatedRoute,
         private accountService: AccountService
     ) { }
 
@@ -26,11 +27,6 @@ export class RegisterComponent implements OnInit {
     }
 
     passwordsEqual(c: AbstractControl) {
-        //safety check
-        // carry out the actual date checks here for is-endDate-after-startDate
-        // if valid, return null,
-        // if invalid, return an error object (any arbitrary name), like, return { invalidEndDate: true }
-        // make sure it always returns a 'null' for valid or non-relevant cases, and a 'non-null' object for when an error should be raised on the formGroup
         if (!c) { return null; }
         if (!c.value) { return null; }
         if (c.value.confirmPassword !== c.value.password) {
@@ -44,7 +40,13 @@ export class RegisterComponent implements OnInit {
         this.submitted = true;
         console.log(username, password);
         if (confirmpassword === password) {
-            this.accountService.register(username, password).subscribe(value => { console.log(value); });
+            this.accountService.register(username, password).subscribe(value => {
+                if ( value.result === 'success') {
+                    localStorage.setItem('user', JSON.stringify(value.id));
+                    this.accountService.userSubject.next(value.id);
+                    this.router.navigate(['maps/main']);
+                }
+            });
         }
         else {
             console.log('Passwords must be equal');

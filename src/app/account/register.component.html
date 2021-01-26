@@ -1,39 +1,39 @@
 ﻿<div class="main-div">
     <mat-card>
        <mat-card-header>
-          <mat-card-title>Register</mat-card-title>
+          <mat-card-title>Rejestracja</mat-card-title>
        </mat-card-header>
        <mat-card-content>
           <form [formGroup]="form">
             <mat-form-field style=" width: 100%">
-               <input #username matInput placeholder="Username" formControlName="username" name="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
+               <input #username matInput placeholder="Nazwa użytkownika" formControlName="username" name="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
             </mat-form-field>
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-               <div *ngIf="f.username.errors.required" style="color: red;">User name is required</div>
+               <div *ngIf="f.username.errors.required" style="color: red;">Nazwa użytkownika jest wymagana</div>
             </div>
             <mat-form-field style=" width: 100%">
-                <input #password matInput placeholder="Password" formControlName="password" type="password" name="password" required>
+                <input #password matInput placeholder="Hasło" formControlName="password" type="password" name="password" required>
             </mat-form-field>
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-               <div *ngIf="f.password.errors.required" style="color: red;">Password is required</div>
-               <div *ngIf="f.password.errors.minlength" style="color: red;">Password must be at least 6 characters</div>
+               <div *ngIf="f.password.errors.required" style="color: red;">Hasło jest wymagane</div>
+               <div *ngIf="f.password.errors.minlength" style="color: red;">Hasło musi się składać z minimum 6 znaków</div>
             </div>
             <mat-form-field style=" width: 100%">
-                <input #confirmpassword matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password" name="confirmPassword" required>
+                <input #confirmpassword matInput placeholder="Powtórz hasło" formControlName="confirmPassword" type="password" name="confirmPassword" required>
             </mat-form-field>
             <div *ngIf="submitted && v.errors" class="invalid-feedback">
-               <div *ngIf="submitted" style="color: red;">Passwords must be equal</div>
+               <div *ngIf="submitted" style="color: red;">Hasło muszą być równe</div>
             </div>
           </form>
        </mat-card-content>
        <mat-card-actions>
           <button style="width: 100%;" mat-raised-button (click)="register(username.value, password.value
-          , confirmpassword.value)" color="primary">Register</button>
+          , confirmpassword.value)" color="primary">Zarejestruj</button>
        </mat-card-actions>
 
        <div class="login-sub-footer" style="margin-top: 62% !important;">
-           <div class="no-account-text">You have an account?</div>
-           <div class="sign-up-text"><span (click) = "loginView()">Log in</span></div>
+           <div class="no-account-text">Posiadasz już konto?</div>
+           <div class="sign-up-text"><span (click) = "loginView()">Zaloguj się</span></div>
        </div>
     </mat-card>
   </div>
