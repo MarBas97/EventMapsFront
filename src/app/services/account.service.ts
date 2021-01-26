@@ -10,18 +10,18 @@ import { User } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<User>;
-    public user: Observable<User>;
+    public userSubject: BehaviorSubject<number>;
+    public user: Observable<number>;
 
     constructor(
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.userSubject = new BehaviorSubject<number>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
     }
 
-    public get userValue(): User {
+    public get userValue(): number {
         return this.userSubject.value;
     }
 
@@ -32,9 +32,7 @@ export class AccountService {
           .pipe(share());
         request.subscribe(res => {
           localStorage.setItem('user', JSON.stringify(res.user_id));
-          const user = new User();
-          user.id = res.user_id;
-          this.userSubject.next(user);
+          this.userSubject.next(res.user_id);
         }, error => {console.log('error login');
         });
         return request;

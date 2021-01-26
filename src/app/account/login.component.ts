@@ -3,8 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/services';
-import {HeaderComponent} from "@app/components/header/header.component";
-
 @Component({ templateUrl: 'login.component.html' , styleUrls: ['./login.component.css']})
 export class LoginComponent implements OnInit {
     loading = false;

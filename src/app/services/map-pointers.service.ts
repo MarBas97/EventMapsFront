@@ -44,7 +44,7 @@ export class MapPointersService {
     }
   public addLike(id: number): Observable<any> {
 
-      if (localStorage.getItem('user') === null) {
+    if (localStorage.getItem('user') === null) {
       console.log('niezalogowany');
       return null;
     }
