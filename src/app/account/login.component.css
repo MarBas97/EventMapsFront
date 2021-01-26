@@ -1,6 +1,6 @@
  mat-card {
-    width: 650px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
     padding-top: 7vh;
     display: block;
     margin-left:auto;
@@ -20,16 +20,22 @@ input {
 
 .main-div{
     display: flex;
-    padding: 0px 10px 0px 10px
+    height: 90vh;
+    justify-content: space-between;
+    padding: 0px 10px 0px 10px;
+    flex-direction: column;
 }
 
+
 .login-sub-footer {
-    margin-top: 60%;
+    width: 100%;
+    max-width: 650px; 
+    margin-left: auto;
+    margin-right: auto;
     padding-bottom: 10px;
     padding-top: 10px;
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
-    height: 40px!important;
     justify-content: space-between!important;
     display: flex;
     align-items: center;

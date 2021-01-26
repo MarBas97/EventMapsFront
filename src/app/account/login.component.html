@@ -1,27 +1,31 @@
 <div class="main-div">
-  <mat-card>
-     <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-     </mat-card-header>
-     <mat-card-content>
-        <form>
-              <mat-form-field style=" width: 100%">
-                    <input matInput placeholder="Nazwa użytkownika" [(ngModel)]="username" name="username" required>
-              </mat-form-field>
-           <mat-form-field style=" width: 100%">
-              <input matInput placeholder="Hasło" [(ngModel)]="password" type="password" name="password" required>
-           </mat-form-field>
-        </form>
-     </mat-card-content>
-     <mat-card-actions>
-        <button style="width: 100%;" mat-raised-button (click)="login()" color="primary">Zaloguj</button>
-     </mat-card-actions>
+   <div style="height: 50%; width: 100%; max-width: 650px; display: flex; align-content: center; margin: auto">
+      <mat-card>
+         <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+         </mat-card-header>
+         <mat-card-content>
+            <form>
+               <mat-form-field style=" width: 100%">
+                  <input matInput placeholder="Nazwa użytkownika" [(ngModel)]="username" name="username" required>
+               </mat-form-field>
+               <mat-form-field style=" width: 100%">
+                  <input matInput placeholder="Hasło" [(ngModel)]="password" type="password" name="password" required>
+               </mat-form-field>
+            </form>
+         </mat-card-content>
+         <mat-card-actions>
+            <button style="width: 100%;" mat-raised-button (click)="login()" color="primary">Zaloguj</button>
+         </mat-card-actions>
 
-     <div class="login-sub-footer">
+
+      </mat-card>
+   </div>
+   <div style="height: 40%;"></div>
+   <div style="height: 10%;">
+      <div class="login-sub-footer">
          <div class="no-account-text">Nie posiadasz konta?</div>
-         <div class="sign-up-text"><span (click) = "registerView()">Stwórz konto</span></div>
-     </div>
-  </mat-card>
+         <div class="sign-up-text"><span (click)="registerView()">Stwórz konto</span></div>
+      </div>
+   </div>
 </div>
-
-
